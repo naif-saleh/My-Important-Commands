@@ -18,3 +18,8 @@
 	./vendor/bin/sail composer install
 
 	
+4-ErrorException mkdir(): Permission denied at vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:651.
+
+	./vendor/bin/sail exec laravel.test bash -c "chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache && chown -R sailuser:sailuser /var/www/html"
+
+   
