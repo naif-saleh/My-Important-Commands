@@ -1,0 +1,20 @@
+1- The error Permission denied typically occurs because the web server or PHP does not have write access to the storage or cache directories in your Laravel application.
+
+	docker exec -it <container_name> bash
+	chmod -R 775 storage bootstrap/cache
+	chown -R www-data:www-data storage bootstrap/cache
+
+
+2-./composer.json is not writable
+	
+	./vendor/bin/sail root-shell using root sail....
+	chmod 666 composer.json
+	chmod 666 composer.lock
+
+3-The error indicates that Laravel's Filesystem class is unable to create a directory within the /var/www/html/vendor path, likely due to permission issues. Here's how you can fix this when using Laravel Sail.
+
+	./vendor/bin/sail exec laravel.test bash -c "chmod -R 775 /var/www/html/vendor && chown -R sailuser:sailuser /var/www/html/vendor"
+	./vendor/bin/sail exec laravel.test bash -c "rm -rf /var/www/html/vendor"
+	./vendor/bin/sail composer install
+
+	
